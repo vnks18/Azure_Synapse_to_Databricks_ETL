@@ -89,16 +89,3 @@ notebooks/utils.py
 |---------|----------|-----------|----------------------------------|
 | Raw     | raw      | analytics | sales_transaction_raw           |
 | Silver  | main     | analytics | sales_transaction_silver        |
-
----
-
-## 🚀 Next Steps
-
-1. Upload this project to GitHub:
-   - Name: `azure-synapse-to-databricks-etl`
-   - Add this README
-   - Include your data/notebooks/architecture.png
-
-2. Connect DSP and Unity Catalog to validate
-
-3. Fork and extend for real-time or bronze-silver-gold patterns
