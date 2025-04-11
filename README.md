@@ -2,7 +2,7 @@
 
 ## 📌 Objective
 
-Migrate data from Azure Synapse Analytics Dedicated SQL Pool (DSP) to Databricks Unity Catalog(underlying storage is ADLS) using a structured Delta Lake approach with **raw** and **silver** layers.
+This project demonstrates a practical migration workflow for moving data from **Azure Synapse Dedicated SQL Pool (DSP)** to **Databricks Unity Catalog**, using Delta Lake's **raw** and **silver** layers. The pipeline includes reading from Synapse, data cleansing, enrichment, and writing to Delta format tables for analytics.
 
 ---
 
@@ -34,12 +34,13 @@ AzureSynapse_To_Databricks_Migration/
 
 | Feature                  | Synapse DSP       | Databricks Lakehouse    |
 |--------------------------|-------------------|--------------------------|
-| Compute Flexibility      | Fixed DWU         | Auto-scale clusters      |
-| Data Format Support      | Tabular only      | Delta, Parquet, CSV, etc |
+| Compute Flexibility      | Fixed DWU (pre-allocated)         | Auto-scale clusters      |
+| Data Format Support      | Tabular only      | Delta, Parquet, CSV, JSON |
 | Streaming Support        | Limited           | Built-in Streaming       |
 | Cost Efficiency          | High on idle DSP  | Pay-per-use              |
-| ML & Data Science        | Separate services | Native to workspace      |
-| Catalog Management       | Basic             | Unity Catalog w/ RBAC    |
+| ML & Data Science        | Separate services | Native to workspace (MLlib, notebooks)     |
+| Orchestration            | Basic pipelines   | Complex orchestration + APIs    |
+| Catalog Management       | Limited             | Unity Catalog (RBAC, lineage)    |
 
 ---
 
@@ -59,10 +60,10 @@ AzureSynapse_To_Databricks_Migration/
 
 ## 🧪 Data Preview / Schema
 
-**Sales Transactions (100,000 rows)**  
+**Sales Transactions (100k rows)**  
 Columns: `TransactionID`, `CustomerID`, `TransactionDate`, `Region`, `ProductCategory`, `Amount`, `PaymentMode`, `DeliveryStatus`, `Rating`, `CustomerFeedback`, ...
 
-**Customer Data (5,000 rows)**  
+**Customer Data (5k rows)**  
 Columns: `CustomerID`, `CustomerName`, `Email`, `Country`, `SignupDate`, `Status`, `PreferredChannel`, ...
 
 ---
@@ -83,9 +84,28 @@ notebooks/utils.py
 
 ---
 
+## 🚀 How to Use
+
+1. Upload `sales_transactions.csv` and `customer_data.csv` to Databricks DBFS or external storage.
+2. Update JDBC configs in `01_dsp_read_to_raw.py` and `utils.py`.
+3. Run notebooks in sequence.
+4. For improved logic, use `02_clean_transform_join.py`.
+
+---
+
 ## ✅ Output Tables
 
 | Layer   | Catalog  | Schema    | Table                            |
 |---------|----------|-----------|----------------------------------|
 | Raw     | raw      | analytics | sales_transaction_raw           |
 | Silver  | main     | analytics | sales_transaction_silver        |
+
+---
+
+## 📈 Future Steps
+
+- Add gold layer aggregations
+- Integrate with Power BI via Databricks SQL
+- Monitor schema changes and automate catalog registration
+
+---
