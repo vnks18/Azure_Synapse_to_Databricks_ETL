@@ -2,7 +2,7 @@
 
 ## 📌 Objective
 
-Migrate data from Azure Synapse Dedicated SQL Pool (DSP) to Databricks Unity Catalog using a structured Delta Lake approach with **raw** and **silver** layers.
+Migrate data from Azure Synapse Analytics Dedicated SQL Pool (DSP) to Databricks Unity Catalog(underlying storage is ADLS) using a structured Delta Lake approach with **raw** and **silver** layers.
 
 ---
 
@@ -11,7 +11,7 @@ Migrate data from Azure Synapse Dedicated SQL Pool (DSP) to Databricks Unity Cat
 ```
 AzureSynapse_To_Databricks_Migration/
 │
-├── data/                           # Simulated 100MB+ realistic data
+├── data/                           # Dummy 100MB+ realistic data
 │   ├── sales_transactions.csv
 │   └── customer_data.csv
 │
@@ -20,7 +20,7 @@ AzureSynapse_To_Databricks_Migration/
 │   ├── 02_clean_transform_join.py
 │   └── utils.py
 │
-├── catalog/                        # SQL schema definition for DSP
+├── catalog/                        # SQL schema definition for DSP and for catalog in databricks
 │   └── schema_definition.sql
 │
 ├── architecture.png                # Visual pipeline diagram
@@ -57,7 +57,7 @@ AzureSynapse_To_Databricks_Migration/
 
 ---
 
-## 🧪 Data Preview
+## 🧪 Data Preview / Schema
 
 **Sales Transactions (100,000 rows)**  
 Columns: `TransactionID`, `CustomerID`, `TransactionDate`, `Region`, `ProductCategory`, `Amount`, `PaymentMode`, `DeliveryStatus`, `Rating`, `CustomerFeedback`, ...
